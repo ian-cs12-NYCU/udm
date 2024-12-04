@@ -191,6 +191,11 @@ func newRouter(s *Server) *gin.Engine {
 	})
 	AddService(udmSDMGroup, udmSDMRoutes)
 
+	// OAM
+	udmOamRoutes := s.getOamRoutes()
+	udmOamGroup := s.router.Group(factory.UdmOamUriPrefix)
+	AddService(udmOamGroup, udmOamRoutes)
+
 	oneLayerPath := "/:supi"
 	udmSDMGroup.Any(oneLayerPath, s.OneLayerPathHandlerFunc)
 
